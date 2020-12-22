@@ -1,16 +1,11 @@
-import React, { useEffect, useState } from "react";
-import { MoviesController } from "../controllers/MoviesController";
+import React from 'react';
 import { setFavourite } from "../actions/favouriteActions";
 import { useDispatch } from 'react-redux';
+import { useMovie } from '../hooks/useMovie';
 
 export const MovieInfo = (props) => {
   const dispatch = useDispatch();
-  const [movie, setMovie] = useState([]);  
-  const id = props.match.params.id;
-
-  useEffect(() => {
-    MoviesController.getDetails(id).then(data => setMovie(data.data));
-  }, [id]);
+  const movie = useMovie(props.match.params.id);
 
   return (
     <>
